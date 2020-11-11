@@ -12,6 +12,7 @@ Role Variables
 --------------
 
 CONSUL_CONFIG - configuration file for Consul, only contains minimum settings
+
 CONSUL_SERVICE - systemd service file for Consul
 
 Dependencies
