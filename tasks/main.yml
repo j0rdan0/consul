@@ -1,0 +1,28 @@
+---
+- name: Performing some prerequisites
+  yum: name={{ item }} state=present
+  loop: [ "unzip","wget" ]
+- yum: name="*" state=latest
+- lineinfile: line={{ PATH }} path=/etc/environment state=present
+- name: Disabling SELinux
+  selinux: state=disabled
+- name: Downloading and extracting Consul archive
+  unarchive: src={{ CONSUL_URL }} dest=/usr/local/bin mode=744 remote_src=yes
+- name: Create group and users for Consul
+  group: name=consul state=present system=yes
+- user: name=consul create_home=no group=consul shell=/sbin/nologin system=yes
+- name: Create Consul directories
+  file: path={{ item }} mode=0775 owner=consul state=directory
+  loop: [ "/var/lib/consul", "/etc/consul.d" ]
+- name: Change owner of Consul binary
+  file: path=/usr/local/bin/consul owner=consul
+- name: Create key for Consul
+  command: /usr/local/bin/consul keygen
+  register: consul_key
+- debug: var=consul_key.stdout
+- name: Create Consul service file
+  template: src={{ CONSUL_SERVICE }} dest=/etc/systemd/system/consul.service
+- name: Copy Consul configuration file
+  template: src={{ CONSUL_CONFIG }} dest=/etc/consul.d/consul.json 
+- name: Start Consul service
+  service: name=consul state=started enabled=true

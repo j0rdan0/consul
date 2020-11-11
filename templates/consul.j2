@@ -1,0 +1,10 @@
+{
+     "bind_addr": "{{ ansible_default_ipv4.address }}",
+     "bootstrap_expect": 1,
+     "client_addr": "0.0.0.0",
+     "datacenter": "DC1",
+     "data_dir": "/var/lib/consul",
+     "encrypt": "{{ consul_key.stdout }}",
+     "server": true,
+     "ui": true
+} 

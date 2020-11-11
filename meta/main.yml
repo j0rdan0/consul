@@ -1,0 +1,15 @@
+galaxy_info:
+  author: j0rdan0
+  description: Ansible role for deploying and configuring Consul server on Centos distro
+
+  license: GPL-2.0-or-later
+
+  min_ansible_version: 2.9
+
+
+  galaxy_tags:
+    consul
+    linux
+    administration
+
+  

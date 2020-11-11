@@ -1,0 +1,5 @@
+---
+CONSUL_URL: "https://releases.hashicorp.com/consul/1.6.2/consul_1.6.2_linux_amd64.zip" 
+CONSUL_CONFIG: "templates/consul.j2"
+CONSUL_SERVICE: "templates/consul.service.j2"
+PATH: "export PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/centos/.local/bin:/home/centos/bin"
